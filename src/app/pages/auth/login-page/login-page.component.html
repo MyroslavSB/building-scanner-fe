@@ -1,0 +1,32 @@
+<div class="login">
+
+  <div class="login__main">
+    <h3 class="login__main-title heading-1">Login</h3>
+
+    <div class="login__main-form">
+      <div class="login__main-form-control">
+        <app-sb-input
+          [control]="getControl(loginForm, 'email')"
+          [controlName]="'Email*'"
+          [placeholder]="'Enter your email...'"
+        ></app-sb-input>
+      </div>
+
+      <div class="login__main-form-control">
+        <app-sb-input
+          [control]="getControl(loginForm, 'password')"
+          [controlName]="'Password*'"
+          [placeholder]="'Enter your password...'"
+          [isPassword]="true"
+        ></app-sb-input>
+      </div>
+
+      <div class="login__main-form-submit">
+        <app-sb-button
+          [buttonText]="'Login'"
+
+        ></app-sb-button>
+      </div>
+    </div>
+  </div>
+</div>

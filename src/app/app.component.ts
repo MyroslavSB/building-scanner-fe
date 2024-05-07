@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import {BaseIconsRegistryService} from "./services/base-icons-registry.service";
+import {completeIconSet} from "../base-icons/base-icons";
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'building-scanner-fe';
+
+  constructor(
+    public iconsRegistry: BaseIconsRegistryService
+  ) {
+    this.iconsRegistry.registerIcons(completeIconSet)
+  }
 }

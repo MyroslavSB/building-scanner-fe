@@ -1,0 +1,16 @@
+<div class="sb-button">
+  <button class="sb-button__button"
+          (click)="onButtonClicked()">
+    <app-base-icon
+      *ngIf="leftIcon"
+      [name]="leftIcon"
+    ></app-base-icon>
+
+    <p *ngIf="buttonText" class="sb-button__text button-text"> {{ buttonText }}</p>
+
+    <app-base-icon
+      *ngIf="leftIcon"
+      [name]="leftIcon"
+    ></app-base-icon>
+  </button>
+</div>

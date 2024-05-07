@@ -1,0 +1,30 @@
+@import "../../../../assets/styles/shared/vars";
+
+.sb-button {
+  width: 100%;
+  height: 100%;
+
+  &__button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: $black;
+    transition: 0.3s ease-in;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      background: $norm-text;
+    }
+
+  }
+
+  &__text {
+    color: $white;
+    margin: 0 auto;
+    width: max-content;
+  }
+}

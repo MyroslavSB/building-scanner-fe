@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/index";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    cursor: inherit;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+
+  &:visited {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: initial;
+}
+
+input, label {
+  cursor: pointer;
+}
+
+.container {
+  width: 85%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.field-error {
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  color: $warning;
+  margin-top: 7px;
+
+  app-base-icon {
+    margin-right: 4px;
+  }
+
+}

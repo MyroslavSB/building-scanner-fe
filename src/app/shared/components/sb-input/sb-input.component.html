@@ -1,0 +1,25 @@
+<div class="field">
+  <p class="field__name medium-small" *ngIf="controlName">
+    {{ controlName }}
+  </p>
+
+  <div class="field__wrapper">
+    <input class="field__wrapper-input medium"
+           [type]="inputType"
+           [formControl]="control"
+           [readOnly]="disabledInput"
+           [placeholder]="placeholder"
+           (keydown.enter)="onEnterPress()"
+    />
+
+    <div class="right-icon icon"
+         *ngIf="isPassword"
+    >
+      <app-base-icon
+        [name]="rightIcon"
+        (click)="changeInputType()"
+      ></app-base-icon>
+    </div>
+  </div>
+</div>
+
