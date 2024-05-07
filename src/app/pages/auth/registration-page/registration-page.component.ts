@@ -35,11 +35,11 @@ import {BaseIconComponent} from "../../../shared/components/base-icon/base-icon.
 export class RegistrationPageComponent implements OnInit {
   public readonly regSteps = ERegSteps
 
-  public regStep: ERegSteps = ERegSteps.ENTER_EMAIL
+  public regStep: ERegSteps = ERegSteps.ENTER_INFO
 
-  public emailControl: FormControl
+  public infoForm: FormGroup
   public passwordForm: FormGroup
-  public userInfoForm: FormGroup
+
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -52,10 +52,15 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   private initForms(): void {
-    this.emailControl = new FormControl('', [
-      Validators.required,
-      CustomValidators.emailValidator
-    ])
+    this.infoForm = this.fb.group({
+      email: new FormControl('', [
+        Validators.required,
+        CustomValidators.emailValidator
+      ]),
+      username: new FormControl('', [
+        Validators.required,
+      ]),
+    })
 
     this.passwordForm = this.fb.group({
       password_1: ['', [
@@ -67,20 +72,7 @@ export class RegistrationPageComponent implements OnInit {
       ]]
     }, {validators: [this.passwordsValidator]})
 
-    this.userInfoForm = this.fb.group({
-      first_name: ['', [
-        Validators.required,
-        CustomValidators.firstNameValidator
-      ]],
-      last_name: ['', [
-        Validators.required,
-        CustomValidators.lastNameValidator
-      ]],
-      phone_number: ['', [
-        Validators.required,
-        CustomValidators.phoneNumberValidator
-      ]],
-    })
+
   }
 
   public verifyEmail(): void {
@@ -89,7 +81,6 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   public setupPassword(): void {
-    this.regStep = this.regSteps.CREATE_PROFILE
     this.cdRef.detectChanges()
   }
 

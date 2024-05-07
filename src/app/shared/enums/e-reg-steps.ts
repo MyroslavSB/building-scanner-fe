@@ -1,5 +1,4 @@
 export enum ERegSteps {
-  ENTER_EMAIL = 'email',
+  ENTER_INFO = 'email',
   SETUP_PASSWORD = 'setup-password',
-  CREATE_PROFILE = 'create-profile'
 }

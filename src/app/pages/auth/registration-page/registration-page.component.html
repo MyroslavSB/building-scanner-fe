@@ -2,18 +2,29 @@
   <div class="reg-page__main">
     <ng-container [ngSwitch]="regStep">
 
-      <ng-container *ngSwitchCase="regSteps.ENTER_EMAIL">
+      <ng-container *ngSwitchCase="regSteps.ENTER_INFO">
         <h3 class="reg-page__main-title heading-1">Enter your email</h3>
 
         <div class="reg-page__main-form">
           <div class="reg-page__main-form-control">
             <app-sb-input
-              [control]="emailControl"
+              [control]="getControl(infoForm, 'email')"
               [controlName]="'Email*'"
               [placeholder]="'Enter your email...'"
             ></app-sb-input>
             <ng-container
-              *ngTemplateOutlet="fieldError; context: { $implicit: emailControl }"
+              *ngTemplateOutlet="fieldError; context: { $implicit: getControl(infoForm, 'email') }"
+            ></ng-container>
+          </div>
+
+          <div class="reg-page__main-form-control">
+            <app-sb-input
+              [control]="getControl(infoForm, 'username')"
+              [controlName]="'Username*'"
+              [placeholder]="'Enter your username...'"
+            ></app-sb-input>
+            <ng-container
+              *ngTemplateOutlet="fieldError; context: { $implicit: getControl(infoForm, 'username') }"
             ></ng-container>
           </div>
 
@@ -61,51 +72,6 @@
         </div>
       </ng-container>
 
-      <ng-container *ngSwitchCase="regSteps.CREATE_PROFILE">
-        <h3 class="reg-page__main-title heading-1">Create your profile</h3>
-
-        <div class="reg-page__main-form">
-          <div class="reg-page__main-form-control">
-            <app-sb-input
-              [control]="getControl(userInfoForm, 'first_name')"
-              [controlName]="'First name*'"
-              [placeholder]="'Enter your first name...'"
-            ></app-sb-input>
-            <ng-container
-              *ngTemplateOutlet="fieldError; context: { $implicit: userInfoForm.get('first_name') }"
-            ></ng-container>
-          </div>
-
-          <div class="reg-page__main-form-control">
-            <app-sb-input
-              [control]="getControl(userInfoForm, 'last_name')"
-              [controlName]="'Last name*'"
-              [placeholder]="'Enter your last name...'"
-            ></app-sb-input>
-            <ng-container
-              *ngTemplateOutlet="fieldError; context: { $implicit: userInfoForm.get('last_name') }"
-            ></ng-container>
-          </div>
-
-          <div class="reg-page__main-form-control">
-            <app-sb-input
-              [control]="getControl(userInfoForm, 'phone_number')"
-              [controlName]="'Phone number*'"
-              [placeholder]="'Enter your phone number...'"
-            ></app-sb-input>
-            <ng-container
-              *ngTemplateOutlet="fieldError; context: { $implicit: userInfoForm.get('phone_number') }"
-            ></ng-container>
-          </div>
-
-          <div class="reg-page__main-form-submit">
-            <app-sb-button
-              [buttonText]="'Finish registration'"
-              (buttonClicked)="registerUser()"
-            ></app-sb-button>
-          </div>
-        </div>
-      </ng-container>
     </ng-container>
   </div>
 </div>
