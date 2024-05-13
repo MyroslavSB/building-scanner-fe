@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {ERegSteps} from "../../../shared/enums/e-reg-steps";
 import {
   AbstractControl,
@@ -16,6 +16,11 @@ import {CustomValidators} from "../../../shared/const/validators";
 import {EFormErrors} from "../../../shared/enums/e-form-errors";
 import {BaseIconComponent} from "../../../shared/components/base-icon/base-icon.component";
 import {AuthApiService} from "../../../services/auth-api-service/auth-api.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {LocalStorageService} from "../../../services/local-storage.service";
+import {ELocalStorageItems} from "../../../shared/enums/e-local-storage-items";
+import {Router} from "@angular/router";
+import {AppRoutes} from "../../../shared/const/routes";
 
 @Component({
   selector: 'app-registration-page',
@@ -34,6 +39,8 @@ import {AuthApiService} from "../../../services/auth-api-service/auth-api.servic
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationPageComponent implements OnInit {
+  private destroyRef = inject(DestroyRef)
+
   public readonly regSteps = ERegSteps
 
   public regStep: ERegSteps = ERegSteps.ENTER_INFO
@@ -41,11 +48,15 @@ export class RegistrationPageComponent implements OnInit {
   public infoForm: FormGroup
   public passwordForm: FormGroup
 
+  private storageItems = ELocalStorageItems
+  private appRoutes = AppRoutes
 
   constructor(
     private cdRef: ChangeDetectorRef,
     private fb: FormBuilder,
-    private authAPI: AuthApiService
+    private authAPI: AuthApiService,
+    private localStorage: LocalStorageService,
+    private router: Router
   ) {
   }
 
@@ -91,7 +102,11 @@ export class RegistrationPageComponent implements OnInit {
       "username": "TestUsername"
     }
     this.authAPI.register(body)
-      .subscribe()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(token => {
+        this.localStorage.setItem(this.storageItems.ACCESS_TOKEN, token.access_token)
+        this.router.navigate([this.appRoutes.main_page])
+      })
   }
 
   public getControl(form: FormGroup, controlName: string): FormControl {
