@@ -16,6 +16,5 @@ export const routes: Routes = [
   {
     path: AppRoutes.register.routerPath,
     loadComponent: () => import('./pages/auth/registration-page/registration-page.component').then(comp => comp.RegistrationPageComponent)
-  },
-
+  }
 ];

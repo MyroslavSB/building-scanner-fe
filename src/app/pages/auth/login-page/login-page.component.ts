@@ -1,8 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {SbInputComponent} from "../../../shared/components/sb-input/sb-input.component";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SbButtonComponent} from "../../../shared/components/sb-button/sb-button.component";
-cimport {AuthApiService} from "../../../services/auth-api.service";
+import {AuthApiService} from "../../../services/auth-api-service/auth-api.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {LocalStorageService} from "../../../services/local-storage.service";
+import {ELocalStorageItems} from "../../../shared/enums/e-local-storage-items";
+import {Router} from "@angular/router";
+import {AppRoutes} from "../../../shared/const/routes";
 
 @Component({
   selector: 'app-login-page',
@@ -16,12 +21,18 @@ cimport {AuthApiService} from "../../../services/auth-api.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent implements OnInit {
+  private destroyRef: DestroyRef = inject(DestroyRef)
 
   public loginForm: FormGroup
 
+  private localStorageKeys = ELocalStorageItems
+  private appRoutes = AppRoutes
+
   constructor(
     private fb: FormBuilder,
-    private authAPI: AuthApiService
+    private authAPI: AuthApiService,
+    private localStorage: LocalStorageService,
+    private router: Router
   ) {
   }
 
@@ -44,7 +55,11 @@ export class LoginPageComponent implements OnInit {
 
   public login(): void {
     this.authAPI.login(this.loginForm.getRawValue())
-      .subscribe()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(token => {
+        this.localStorage.setItem(this.localStorageKeys.ACCESS_TOKEN, token.access_token)
+        this.router.navigate([this.appRoutes.main_page.fullPath])
+      })
 
   }
 

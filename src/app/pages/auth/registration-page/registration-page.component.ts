@@ -15,7 +15,7 @@ import {SbInputComponent} from "../../../shared/components/sb-input/sb-input.com
 import {CustomValidators} from "../../../shared/const/validators";
 import {EFormErrors} from "../../../shared/enums/e-form-errors";
 import {BaseIconComponent} from "../../../shared/components/base-icon/base-icon.component";
-import {AuthApiService} from "../../../services/auth-api.service";
+import {AuthApiService} from "../../../services/auth-api-service/auth-api.service";
 
 @Component({
   selector: 'app-registration-page',
