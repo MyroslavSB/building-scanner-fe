@@ -1,0 +1,15 @@
+.main-page {
+  &__main {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+
+    &-header {
+      text-align: center;
+
+      &-title {
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
