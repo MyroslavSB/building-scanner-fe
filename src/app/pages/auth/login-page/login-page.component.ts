@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {SbInputComponent} from "../../../shared/components/sb-input/sb-input.component";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SbButtonComponent} from "../../../shared/components/sb-button/sb-button.component";
+cimport {AuthApiService} from "../../../services/auth-api.service";
 
 @Component({
   selector: 'app-login-page',
@@ -12,14 +13,15 @@ import {SbButtonComponent} from "../../../shared/components/sb-button/sb-button.
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent implements OnInit {
 
   public loginForm: FormGroup
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authAPI: AuthApiService
   ) {
   }
 
@@ -38,6 +40,12 @@ export class LoginPageComponent implements OnInit {
 
       ]]
     })
+  }
+
+  public login(): void {
+    this.authAPI.login(this.loginForm.getRawValue())
+      .subscribe()
+
   }
 
   public getControl(form: FormGroup, controlName: string): FormControl {

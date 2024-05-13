@@ -15,6 +15,7 @@ import {SbInputComponent} from "../../../shared/components/sb-input/sb-input.com
 import {CustomValidators} from "../../../shared/const/validators";
 import {EFormErrors} from "../../../shared/enums/e-form-errors";
 import {BaseIconComponent} from "../../../shared/components/base-icon/base-icon.component";
+import {AuthApiService} from "../../../services/auth-api.service";
 
 @Component({
   selector: 'app-registration-page',
@@ -43,7 +44,8 @@ export class RegistrationPageComponent implements OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authAPI: AuthApiService
   ) {
   }
 
@@ -71,8 +73,6 @@ export class RegistrationPageComponent implements OnInit {
         Validators.required
       ]]
     }, {validators: [this.passwordsValidator]})
-
-
   }
 
   public verifyEmail(): void {
@@ -85,8 +85,13 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   public registerUser(): void {
-    // this.regStep = this.regSteps.SETUP_PASSWORD
-    // this.cdRef.detectChanges()
+    const body = {
+      "email": "testuser@gmail.com",
+      "password": "Student2008&",
+      "username": "TestUsername"
+    }
+    this.authAPI.register(body)
+      .subscribe()
   }
 
   public getControl(form: FormGroup, controlName: string): FormControl {
