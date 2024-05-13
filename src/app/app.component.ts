@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import {BaseIconsRegistryService} from "./services/base-icons-registry.service";
 import {completeIconSet} from "../base-icons/base-icons";
 import {HttpClientModule} from "@angular/common/http";
+import {NavbarComponent} from "./shared/components/navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule],
+  imports: [CommonModule, RouterOutlet, HttpClientModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

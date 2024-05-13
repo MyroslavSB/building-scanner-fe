@@ -1,0 +1,37 @@
+@import "../../../../assets/styles/shared/vars";
+
+.navbar {
+  width: 100%;
+  background-color: $black;
+  padding: 10px 0;
+
+  &__main {
+    display: flex;
+    width: 100%;
+    padding: 8px 16px;
+
+    &-item {
+      margin: 0 15px;
+      cursor: pointer;
+      transition: color 0.3s;
+      color: $text-fifth;
+
+      &:hover {
+        color: $text-third;
+      }
+
+      &.active,
+      &:active {
+        color: $accent-primary-default;
+        //font-weight: bold;
+      }
+    }
+  }
+
+  .navbar {
+    // Main Navbar Items
+    .navbar__main {
+
+    }
+  }
+}
