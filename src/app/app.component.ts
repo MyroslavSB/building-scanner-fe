@@ -5,6 +5,7 @@ import {BaseIconsRegistryService} from "./services/base-icons-registry.service";
 import {completeIconSet} from "../base-icons/base-icons";
 import {HttpClientModule} from "@angular/common/http";
 import {NavbarComponent} from "./shared/components/navbar/navbar.component";
+import {UserInfoService} from "./services/user-info/user-info.service";
 
 @Component({
   selector: 'app-root',

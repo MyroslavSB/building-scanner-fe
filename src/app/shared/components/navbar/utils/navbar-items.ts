@@ -4,7 +4,7 @@ import {AppRoutes} from "../../../const/routes";
 export const NavbarItems: INavbarItem[] = [
   {
     text: 'Home',
-    path: AppRoutes.main_page.fullPath
+    path: AppRoutes.home_page.fullPath
   },
   {
     text: 'Buildings',

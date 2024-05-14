@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UserInfoService} from "../../../../../services/user-info/user-info.service";
 
 @Component({
   selector: 'app-profile-page',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './profile-page.component.scss'
 })
 export class ProfilePageComponent {
+
+  constructor(
+    private userInfo: UserInfoService
+  ) {
+  }
+
 
 }

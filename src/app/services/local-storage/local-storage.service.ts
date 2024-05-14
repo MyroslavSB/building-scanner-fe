@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ELocalStorageItems} from "../shared/enums/e-local-storage-items";
+import {ELocalStorageItems} from "./utils/e-local-storage-items";
 
 @Injectable({
   providedIn: 'root'

@@ -4,8 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SbButtonComponent} from "../../../shared/components/sb-button/sb-button.component";
 import {AuthApiService} from "../../../services/auth-api-service/auth-api.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {LocalStorageService} from "../../../services/local-storage.service";
-import {ELocalStorageItems} from "../../../shared/enums/e-local-storage-items";
+import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
+import {ELocalStorageItems} from "../../../services/local-storage/utils/e-local-storage-items";
 import {Router} from "@angular/router";
 import {AppRoutes} from "../../../shared/const/routes";
 
@@ -58,7 +58,7 @@ export class LoginPageComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(token => {
         this.localStorage.setItem(this.localStorageKeys.ACCESS_TOKEN, token.access_token)
-        this.router.navigate([this.appRoutes.main_page.fullPath])
+        this.router.navigate([this.appRoutes.home_page.fullPath])
       })
 
   }

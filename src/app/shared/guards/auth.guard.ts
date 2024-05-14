@@ -1,7 +1,7 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {LocalStorageService} from "../../services/local-storage.service";
-import {ELocalStorageItems} from "../enums/e-local-storage-items";
+import {LocalStorageService} from "../../services/local-storage/local-storage.service";
+import {ELocalStorageItems} from "../../services/local-storage/utils/e-local-storage-items";
 import {AppRoutes} from "../const/routes";
 
 export const authGuard: CanActivateFn = (route, state) => {

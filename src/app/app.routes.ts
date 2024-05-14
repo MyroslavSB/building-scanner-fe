@@ -12,15 +12,9 @@ export const routes: Routes = [
     path: AppRoutes.register.routerPath,
     loadComponent: () => import('./pages/auth/registration-page/registration-page.component').then(comp => comp.RegistrationPageComponent)
   },
-  {
-    path: AppRoutes.main_page.routerPath,
-    loadComponent: () => import('./pages/main/main-page/main-page.component').then(comp => comp.MainPageComponent),
-    pathMatch: 'full',
-    canActivate: [authGuard],
-  },
   ...MainChildrenRoutes,
   {
     path: '**',
-    redirectTo: AppRoutes.main_page.routerPath
+    redirectTo: AppRoutes.home_page.routerPath
   }
 ];

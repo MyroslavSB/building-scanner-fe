@@ -17,8 +17,8 @@ import {EFormErrors} from "../../../shared/enums/e-form-errors";
 import {BaseIconComponent} from "../../../shared/components/base-icon/base-icon.component";
 import {AuthApiService} from "../../../services/auth-api-service/auth-api.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {LocalStorageService} from "../../../services/local-storage.service";
-import {ELocalStorageItems} from "../../../shared/enums/e-local-storage-items";
+import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
+import {ELocalStorageItems} from "../../../services/local-storage/utils/e-local-storage-items";
 import {Router} from "@angular/router";
 import {AppRoutes} from "../../../shared/const/routes";
 
@@ -105,7 +105,7 @@ export class RegistrationPageComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(token => {
         this.localStorage.setItem(this.storageItems.ACCESS_TOKEN, token.access_token)
-        this.router.navigate([this.appRoutes.main_page])
+        this.router.navigate([this.appRoutes.home_page])
       })
   }
 
