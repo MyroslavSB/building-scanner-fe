@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {AppRoutes} from "./shared/const/routes";
 import {authGuard} from "./shared/guards/auth.guard";
-import {MainChildrenRoutes} from "./pages/main/main-page/main-children.routes";
+import {MainChildrenRoutes} from "./pages/main/main-children.routes";
 
 export const routes: Routes = [
   {
