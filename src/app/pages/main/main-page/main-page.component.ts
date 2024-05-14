@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterModule, RouterOutlet} from "@angular/router";
-import {MainChildrenRoutes} from "../main-children.routes";
+import {RouterOutlet} from "@angular/router";
 import {NavbarComponent} from "../../../shared/components/navbar/navbar.component";
 
 @Component({
