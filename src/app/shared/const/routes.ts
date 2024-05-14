@@ -22,7 +22,7 @@ export const AppRoutes: Record<
 > = {
   login: {routerPath: 'login', fullPath: 'login'},
   register: {routerPath: 'register', fullPath: 'register'},
-  main_page: {routerPath: '', fullPath: ''},
+  main_page: {routerPath: 'main', fullPath: 'main'},
   profile_page: {routerPath: 'profile', fullPath: 'profile'},
   buildings_page: {routerPath: 'buildings', fullPath: 'buildings'},
   rankings_page: {routerPath: 'rankings', fullPath: 'rankings'}
