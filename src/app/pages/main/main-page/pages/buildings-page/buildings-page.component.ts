@@ -18,6 +18,7 @@ import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-b
 export class BuildingsPageComponent {
   public buildings: IBuilding[] = [
     {
+      id: 1,
       name: 'Empire State Building',
       location: 'New York, NY',
       description: 'A famous skyscraper located in Midtown Manhattan.',
@@ -25,6 +26,7 @@ export class BuildingsPageComponent {
       visited: false
     },
     {
+      id: 2,
       name: 'Burj Khalifa',
       location: 'Dubai, UAE',
       description: 'The tallest building in the world, standing at 828 meters.',
@@ -32,6 +34,7 @@ export class BuildingsPageComponent {
       visited: false
     },
     {
+      id: 3,
       name: 'Eiffel Tower',
       location: 'Paris, France',
       description: 'A wrought-iron lattice tower on the Champ de Mars.',
@@ -39,6 +42,7 @@ export class BuildingsPageComponent {
       visited: false
     },
     {
+      id: 4,
       name: 'Empire State Building',
       location: 'New York, NY',
       description: 'A famous skyscraper located in Midtown Manhattan.',
@@ -47,6 +51,7 @@ export class BuildingsPageComponent {
 
     },
     {
+      id: 5,
       name: 'Empire State Building',
       location: 'New York, NY',
       description: 'A famous skyscraper located in Midtown Manhattan.',
