@@ -1,1 +1,23 @@
-<p>rankings-page works!</p>
+<div class="rankings-page">
+  <h1 class="rankings-page__title heading-1">User Rankings</h1>
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr class="medium">
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Visit Count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index" class="medium">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.visit_count }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

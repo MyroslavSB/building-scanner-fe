@@ -27,5 +27,5 @@ export const AppRoutes: Record<
   home_page: {routerPath: 'home', fullPath: '/home'},
   profile_page: {routerPath: 'profile', fullPath: '/profile'},
   buildings_page: {routerPath: 'buildings', fullPath: '/buildings'},
-  rankings_page: {routerPath: 'rankings', fullPath: '/yourankings'}
+  rankings_page: {routerPath: 'rankings', fullPath: '/rankings'}
 }

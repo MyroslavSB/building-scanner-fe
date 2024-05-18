@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IBuilding} from "../../../../../shared/interfaces/i-building";
+import {IBuilding} from "../../../../../shared/interfaces/core-models/i-building";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-button.component";
 
