@@ -21,11 +21,11 @@ export const AppRoutes: Record<
     fullPath?: string;
   }
 > = {
-  login: {routerPath: 'login', fullPath: 'login'},
-  register: {routerPath: 'register', fullPath: 'register'},
+  login: {routerPath: 'login', fullPath: '/login'},
+  register: {routerPath: 'register', fullPath: '/register'},
   main_page: {routerPath: '', fullPath: ''},
-  home_page: {routerPath: 'home', fullPath: 'home'},
-  profile_page: {routerPath: 'profile', fullPath: 'profile'},
-  buildings_page: {routerPath: 'buildings', fullPath: 'buildings'},
-  rankings_page: {routerPath: 'rankings', fullPath: 'rankings'}
+  home_page: {routerPath: 'home', fullPath: '/home'},
+  profile_page: {routerPath: 'profile', fullPath: '/profile'},
+  buildings_page: {routerPath: 'buildings', fullPath: '/buildings'},
+  rankings_page: {routerPath: 'rankings', fullPath: '/yourankings'}
 }

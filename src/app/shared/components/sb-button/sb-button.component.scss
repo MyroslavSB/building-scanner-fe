@@ -7,23 +7,25 @@
   &__button {
     width: 100%;
     height: 100%;
+    padding: 15px 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
     background: $black;
+    border: 1px solid transparent;
     transition: 0.3s ease-in;
     color: $white;
     cursor: pointer;
 
     &:hover {
-      background: $norm-text;
+      background: $black;
+      color: $accent-primary-default ;
+      border: 1px solid $accent-primary-default;
     }
-
   }
 
   &__text {
-    color: $white;
     margin: 0 auto;
     width: max-content;
   }
