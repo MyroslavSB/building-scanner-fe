@@ -1,0 +1,58 @@
+@import "../../../../../../assets/styles/shared/vars";
+
+.building-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .building-details {
+    padding: 40px 20px;
+
+    .heading-1 {
+      margin-bottom: 20px;
+      font-size: 2.5em;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+  }
+
+  .chat-section {
+    flex-grow: 1;
+    border-radius: 4px;
+    padding: 40px 20px;
+    background-color: $accent-primary-light;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .chat-container {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: $white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+
+      .message {
+        margin-bottom: 10px;
+      }
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+
+      &__input {
+        flex: 1;
+      }
+
+      &__button {
+      }
+    }
+  }
+}

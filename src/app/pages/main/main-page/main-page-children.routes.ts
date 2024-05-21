@@ -11,6 +11,10 @@ export const MainPageChildrenRoutes: Routes = [
     loadComponent: () => import('./pages/buildings-page/buildings-page.component').then(component => component.BuildingsPageComponent)
   },
   {
+    path: AppRoutes.building_page.routerPath,
+    loadComponent: () => import('./pages/building-page/building-page.component').then(component => component.BuildingPageComponent)
+  },
+  {
     path: AppRoutes.rankings_page.routerPath,
     loadComponent: () => import('./pages/rankings-page/rankings-page.component').then(component => component.RankingsPageComponent)
   },

@@ -7,7 +7,8 @@ export type MainRoutingPath =
   'home_page' |
   'profile_page' |
   'buildings_page' |
-  'rankings_page'
+  'rankings_page' |
+  'building_page'
 
 
 export type AppRoutingPaths =
@@ -27,5 +28,7 @@ export const AppRoutes: Record<
   home_page: {routerPath: 'home', fullPath: '/home'},
   profile_page: {routerPath: 'profile', fullPath: '/profile'},
   buildings_page: {routerPath: 'buildings', fullPath: '/buildings'},
-  rankings_page: {routerPath: 'rankings', fullPath: '/rankings'}
+  rankings_page: {routerPath: 'rankings', fullPath: '/rankings'},
+  building_page: { routerPath: 'buildings/:id', fullPath: '/buildings/:id' },
+
 }
