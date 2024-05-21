@@ -1,6 +1,29 @@
-<div class="profile">
-  <div class="profile__main">
+<div class="profile-page">
+  <section class="profile-details">
+    <h1 class="heading-1">User Profile</h1>
+    <p class="medium"><strong>Role:</strong> {{ user.role }}</p>
+    <p class="medium"><strong>Email:</strong> {{ user.email }}</p>
+    <p class="medium"><strong>Username:</strong> {{ user.username }}</p>
+  </section>
 
-
-  </div>
+  <section class="user-lists">
+    <div class="list-section">
+      <h2 class="heading-2">Visits</h2>
+      <ul class="horizontal-list">
+        <li *ngFor="let visit of visits" class="medium">{{ visit }}</li>
+      </ul>
+    </div>
+    <div class="list-section">
+      <h2 class="heading-2">Achievements</h2>
+      <ul class="horizontal-list">
+        <li *ngFor="let achievement of achievements" class="medium">{{ achievement }}</li>
+      </ul>
+    </div>
+    <div class="list-section">
+      <h2 class="heading-2">Created Buildings</h2>
+      <ul class="horizontal-list">
+        <li *ngFor="let building of createdBuildings" class="medium">{{ building }}</li>
+      </ul>
+    </div>
+  </section>
 </div>
