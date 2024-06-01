@@ -1,9 +1,12 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IBuilding} from "../../../../../shared/interfaces/core-models/i-building";
 import {FormControl, FormsModule} from "@angular/forms";
 import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-button.component";
 import {SbInputComponent} from "../../../../../shared/components/sb-input/sb-input.component";
-import {NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {BuildingsApiService} from "../../../../../services/buildings-api/buildings-api.service";
+import {filter, Observable, switchMap} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-building-page',
@@ -12,20 +15,19 @@ import {NgForOf} from "@angular/common";
     FormsModule,
     SbButtonComponent,
     SbInputComponent,
-    NgForOf
+    NgForOf,
+    NgIf,
+    NgClass
   ],
   templateUrl: './building-page.component.html',
-  styleUrl: './building-page.component.scss'
+  styleUrls: ['./building-page.component.scss', '../buildings-page/buildings-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BuildingPageComponent {
-  public building: IBuilding = {
-    id: 4,
-    name: 'Empire State Building',
-    location: 'New York, NY',
-    description: 'A famous skyscraper located in Midtown Manhattan.',
-    created_by: 'Empire State Realty Trust',
-    visited: false
-  }
+export class BuildingPageComponent implements OnInit {
+  public building: IBuilding
+
+  private buildingId: number = null
+
   newMessage: FormControl = new FormControl('')
 
   messages: { user: string, text: string }[] = [
@@ -33,7 +35,36 @@ export class BuildingPageComponent {
     {user: 'User2', text: 'I visited last week and it was great.'}
   ]
 
-  sendMessage(): void {
+  constructor(
+    private buildingsAPI: BuildingsApiService,
+    private route: ActivatedRoute,
+    private cdRef: ChangeDetectorRef
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.route.paramMap
+      .pipe(
+        filter(params => {
+          return !!params.get('id')
+        }),
+        switchMap(params => {
+          this.buildingId = Number(params.get('id'))
+
+          return this.getBuildingInfo(this.buildingId)
+        })
+      ).subscribe(building => {
+      this.building = building
+      this.cdRef.detectChanges()
+    })
+  }
+
+  private getBuildingInfo(id: number): Observable<IBuilding> {
+    return this.buildingsAPI.getBuilding(id)
+  }
+
+  public sendMessage(): void {
     if (this.newMessage.value.trim()) {
       this.messages.push({user: 'CurrentUser', text: this.newMessage.value});
       this.newMessage.setValue('');

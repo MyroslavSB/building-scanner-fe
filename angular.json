@@ -62,10 +62,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "building-scanner-fe:build:production"
+              "buildTarget": "building-scanner-fe:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "buildTarget": "building-scanner-fe:build:development"
+              "buildTarget": "building-scanner-fe:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -95,6 +97,7 @@
             "scripts": []
           }
         }
+
       }
     }
   },

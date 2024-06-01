@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IBuilding} from "../../../../../shared/interfaces/core-models/i-building";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-button.component";
+import {BuildingsApiService} from "../../../../../services/buildings-api/buildings-api.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-buildings-page',
@@ -13,214 +15,34 @@ import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-b
     NgIf
   ],
   templateUrl: './buildings-page.component.html',
-  styleUrl: './buildings-page.component.scss'
+  styleUrl: './buildings-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BuildingsPageComponent {
-  public buildings: IBuilding[] = [
-    {
-      id: 1,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
-    },
-    {
-      id: 2,
-      name: 'Burj Khalifa',
-      location: 'Dubai, UAE',
-      description: 'The tallest building in the world, standing at 828 meters.',
-      created_by: 'Emaar Properties',
-      visited: false
-    },
-    {
-      id: 3,
-      name: 'Eiffel Tower',
-      location: 'Paris, France',
-      description: 'A wrought-iron lattice tower on the Champ de Mars.',
-      created_by: 'City of Paris',
-      visited: false
-    },
-    {
-      id: 4,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
+export class BuildingsPageComponent implements OnInit {
+  public buildings: IBuilding[] = []
 
-    },
-    {
-      id: 5,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: true
-    },
-    {
-      id: 1,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
-    },
-    {
-      id: 2,
-      name: 'Burj Khalifa',
-      location: 'Dubai, UAE',
-      description: 'The tallest building in the world, standing at 828 meters.',
-      created_by: 'Emaar Properties',
-      visited: false
-    },
-    {
-      id: 3,
-      name: 'Eiffel Tower',
-      location: 'Paris, France',
-      description: 'A wrought-iron lattice tower on the Champ de Mars.',
-      created_by: 'City of Paris',
-      visited: false
-    },
-    {
-      id: 4,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
+  constructor(
+    private buildingsAPI: BuildingsApiService,
+    private cdRef: ChangeDetectorRef,
+    private router: Router
+  ) {
 
-    },
-    {
-      id: 5,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: true
-    },
-    {
-      id: 1,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
-    },
-    {
-      id: 2,
-      name: 'Burj Khalifa',
-      location: 'Dubai, UAE',
-      description: 'The tallest building in the world, standing at 828 meters.',
-      created_by: 'Emaar Properties',
-      visited: false
-    },
-    {
-      id: 3,
-      name: 'Eiffel Tower',
-      location: 'Paris, France',
-      description: 'A wrought-iron lattice tower on the Champ de Mars.',
-      created_by: 'City of Paris',
-      visited: false
-    },
-    {
-      id: 4,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
+  }
 
-    },
-    {
-      id: 5,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: true
-    },
-    {
-      id: 1,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
-    },
-    {
-      id: 2,
-      name: 'Burj Khalifa',
-      location: 'Dubai, UAE',
-      description: 'The tallest building in the world, standing at 828 meters.',
-      created_by: 'Emaar Properties',
-      visited: false
-    },
-    {
-      id: 3,
-      name: 'Eiffel Tower',
-      location: 'Paris, France',
-      description: 'A wrought-iron lattice tower on the Champ de Mars.',
-      created_by: 'City of Paris',
-      visited: false
-    },
-    {
-      id: 4,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
+  ngOnInit() {
+    this.getBuildings()
+  }
 
-    },
-    {
-      id: 5,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: true
-    },
-    {
-      id: 1,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
-    },
-    {
-      id: 2,
-      name: 'Burj Khalifa',
-      location: 'Dubai, UAE',
-      description: 'The tallest building in the world, standing at 828 meters.',
-      created_by: 'Emaar Properties',
-      visited: false
-    },
-    {
-      id: 3,
-      name: 'Eiffel Tower',
-      location: 'Paris, France',
-      description: 'A wrought-iron lattice tower on the Champ de Mars.',
-      created_by: 'City of Paris',
-      visited: false
-    },
-    {
-      id: 4,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: false
+  private getBuildings(): void {
+    this.buildingsAPI
+      .getBuildings()
+      .subscribe(buildings => {
+        this.buildings = buildings
+        this.cdRef.detectChanges()
+      })
+  }
 
-    },
-    {
-      id: 5,
-      name: 'Empire State Building',
-      location: 'New York, NY',
-      description: 'A famous skyscraper located in Midtown Manhattan.',
-      created_by: 'Empire State Realty Trust',
-      visited: true
-    },
-  ]
+  public goToBuildingPage(building: IBuilding): void {
+    this.router.navigate([`/buildings/${building.id}`])
+  }
 }

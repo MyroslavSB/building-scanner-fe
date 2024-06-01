@@ -2,22 +2,25 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ITokenResponse} from "./utils/interfaces/i-token-response";
+import {AbstractHttpComponent} from "../../shared/abstract/abstract-http-component";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthApiService {
+export class AuthApiService extends AbstractHttpComponent {
 
   constructor(
-    private http: HttpClient
-  ) { }
+    protected override http: HttpClient
+  ) {
+    super(http)
+  }
 
   public login(body: any): Observable<ITokenResponse> {
-    return this.http.post<ITokenResponse>('http://localhost:3000/auth/login', body)
+    return this.http.post<ITokenResponse>(`${this.baseURL}/auth/login`, body)
   }
 
   public register(body: any): Observable<ITokenResponse>{
-    return this.http.post<ITokenResponse>('http://localhost:3000/auth/register', body)
+    return this.http.post<ITokenResponse>(`${this.baseURL}/auth/register`, body)
 
   }
 }

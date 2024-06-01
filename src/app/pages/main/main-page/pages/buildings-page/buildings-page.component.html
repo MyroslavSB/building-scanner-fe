@@ -4,19 +4,23 @@
 
   >
     <div class="building-item"
-         [ngClass]="{ 'visited': building.visited }"
+         [ngClass]="{ 'visited': building?.visited }"
          *ngFor="let building of buildings">
       <h2 class="heading-2">
-        {{ building.name }}
-        <span class="medium" *ngIf="building.visited">visited</span>
+        {{ building?.name }}
+        <span class="medium" *ngIf="building?.visited">visited</span>
       </h2>
-      <p class="medium"><strong>Location:</strong> {{ building.location }}</p>
-      <p class="medium"><strong>Description:</strong> {{ building.description }}</p>
-      <p class="medium"><strong>Owner:</strong> {{ building.created_by }}</p>
+      <p class="medium"><strong>Location:</strong> <br>
+        Latitude: {{ building?.location.latitude }} <br>
+        Longitude: {{ building?.location.longitude }}
+      </p>
+      <p class="medium"><strong>Description:</strong> {{ building?.description }}</p>
+      <p class="medium"><strong>Owner:</strong> {{ building?.created_by.username }}</p>
 
       <div>
         <app-sb-button
           [buttonText]="'See building'"
+          (buttonClicked)="goToBuildingPage(building)"
         ></app-sb-button>
       </div>
 

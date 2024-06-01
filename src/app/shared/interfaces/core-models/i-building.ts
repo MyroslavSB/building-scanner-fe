@@ -1,9 +1,11 @@
+import {IUser} from "./i-user";
+
 export interface IBuilding {
   id: number;
   name: string;
-  location: string;
+  location: ILocation;
   description: string;
-  created_by: string;
+  created_by: IUser;
   visited: boolean;
 }
 

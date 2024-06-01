@@ -1,14 +1,16 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Params} from "@angular/router";
+import {LocalStorageService} from "../../services/local-storage/local-storage.service";
+import {ELocalStorageItems} from "../../services/local-storage/utils/e-local-storage-items";
 
 export class AbstractHttpComponent {
   constructor(
-    protected http: HttpClient,
+    protected http: HttpClient
   ) {
   }
 
-  protected baseURL = 'localhost:3000';
+  protected baseURL = 'http://localhost:3000/api';
 
   public httpPostRequest<ResponseType>(
     url: any,
@@ -23,7 +25,7 @@ export class AbstractHttpComponent {
   public httpGetRequest<ResponseType>(url: any, params: Params = {}): Observable<ResponseType> {
     const headers = this.getHttpHeaders();
 
-    return this.http.get<ResponseType>(this.baseURL + url, {headers, params});
+    return this.http.get<ResponseType>(this.baseURL + url, {headers, params, withCredentials: true});
   }
 
   public httpDeleteRequest(url: any, body: any | null = null, params: Params = {}): Observable<void> {
@@ -40,6 +42,6 @@ export class AbstractHttpComponent {
 
   protected getHttpHeaders(): any {
     return new HttpHeaders()
-      .set('Authorization', `JWT ${localStorage.getItem('access_token')}`)
+      .set('Authorization', `JWT ${localStorage.getItem(ELocalStorageItems.ACCESS_TOKEN)}`)
   }
 }

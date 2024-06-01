@@ -13,6 +13,6 @@ export class MessagesApiService extends AbstractHttpComponent {
 ) {
     super(http)
   }
-  
+
   // public getMessages(): Observable<IMessage>
 }

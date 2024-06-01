@@ -1,18 +1,21 @@
 <div class="building-page">
 <div class="container">
-  <section class="building-details">
-    <h1 class="heading-1">{{ building.name }}</h1>
-    <p class="medium"><strong>Location:</strong> {{ building.location }}</p>
-    <p class="medium">{{ building.description }}</p>
-    <p class="medium"><strong>Owner:</strong> {{ building.created_by }}</p>
+  <div class="building-item"
+       *ngIf="building"
+       style="margin-bottom: 48px"
+       [ngClass]="{ 'visited': building?.visited }">
+    <h2 class="heading-2">
+      {{ building?.name }}
+      <span class="medium" *ngIf="building?.visited">visited</span>
+    </h2>
+    <p class="medium"><strong>Location:</strong> <br>
+      Latitude: {{ building?.location.latitude }} <br>
+      Longitude: {{ building?.location.longitude }}
+    </p>
+    <p class="medium"><strong>Description:</strong> {{ building?.description }}</p>
+    <p class="medium"><strong>Owner:</strong> {{ building?.created_by.username }}</p>
+  </div>
 
-    <div class="building-details__visit">
-      <app-sb-button
-        [buttonText]="'Visit building'"
-        (buttonClicked)="sendMessage()"
-      ></app-sb-button>
-    </div>
-  </section>
 
   <div class="chat-section">
     <h2 class="heading-2">Chat about this building</h2>
