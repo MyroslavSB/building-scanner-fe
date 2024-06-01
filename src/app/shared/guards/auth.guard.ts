@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const localStorageService = inject(LocalStorageService)
   const router = inject(Router)
 
-  const access_token = localStorageService.getItem(ELocalStorageItems.ACCESS_TOKEN)
+  const access_token: string = localStorageService.getItem(ELocalStorageItems.ACCESS_TOKEN)
 
   if (!access_token) {
     router.navigateByUrl(AppRoutes.login.fullPath)

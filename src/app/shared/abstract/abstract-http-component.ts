@@ -6,7 +6,6 @@ import {DOCUMENT} from "@angular/common";
 
 export class AbstractHttpComponent {
   constructor(
-    @Inject(DOCUMENT) protected document: Document,
     protected http: HttpClient,
   ) {
   }

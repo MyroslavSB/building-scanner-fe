@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {IUserInfo} from "./utils/i-user-info";
+import {IUser} from "../../shared/interfaces/core-models/i-user";
 import {DefaultUserInfo} from "./utils/default-user-info";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {DefaultUserInfo} from "./utils/default-user-info";
 })
 export class UserInfoService {
 
-  public userInfo: BehaviorSubject<IUserInfo> = new BehaviorSubject<IUserInfo>(DefaultUserInfo)
+  public userInfo: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(DefaultUserInfo)
 
 
 }

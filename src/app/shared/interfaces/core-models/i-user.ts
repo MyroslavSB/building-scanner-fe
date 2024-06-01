@@ -2,8 +2,11 @@ import {EUserRoles} from "../../../services/user-info/utils/e-user-roles";
 
 export interface IUser {
   id: number;
-  role: EUserRoles;
-  email: string;
   username: string;
-  visit_count: number;
+  email: string;
+  role: EUserRoles;
+  created_buildings_count: number;
+  achievements_count: number;
+  visits_count: number;
+
 }

@@ -1,7 +1,7 @@
-import {IUserInfo} from "./i-user-info";
+import {IUser} from "../../../shared/interfaces/core-models/i-user";
 import {EUserRoles} from "./e-user-roles";
 
-export const DefaultUserInfo: IUserInfo = {
+export const DefaultUserInfo: IUser = {
   id: null,
   username: null,
   email: null,
