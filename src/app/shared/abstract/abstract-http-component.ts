@@ -1,8 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Params} from "@angular/router";
-import {Inject} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
 
 export class AbstractHttpComponent {
   constructor(
@@ -12,42 +10,32 @@ export class AbstractHttpComponent {
 
   protected baseURL = 'localhost:3000';
 
-  public httpPostRequest(
+  public httpPostRequest<ResponseType>(
     url: any,
     body: any = {},
     params: Params = {},
-    isTracking: boolean = false
-  ): Observable<any> {
+  ): Observable<ResponseType> {
     const headers = this.getHttpHeaders();
 
-    if (isTracking) {
-      return this.http.post<any>(this.baseURL + url, body, {
-        headers,
-        params,
-        reportProgress: true,
-        observe: 'events',
-      });
-    }
-
-    return this.http.post<any>(this.baseURL + url, body, {headers, params});
+    return this.http.post<ResponseType>(this.baseURL + url, body, {headers, params});
   }
 
-  public httpGetRequest(url: any, params: Params = {}): Observable<any> {
+  public httpGetRequest<ResponseType>(url: any, params: Params = {}): Observable<ResponseType> {
     const headers = this.getHttpHeaders();
 
-    return this.http.get<any>(this.baseURL + url, {headers, params});
+    return this.http.get<ResponseType>(this.baseURL + url, {headers, params});
   }
 
-  public httpDeleteRequest(url: any, body: any | null = null, params: Params = {}): Observable<any> {
+  public httpDeleteRequest(url: any, body: any | null = null, params: Params = {}): Observable<void> {
     const headers = this.getHttpHeaders();
 
-    return this.http.delete<any>(this.baseURL + url, {headers, body, params});
+    return this.http.delete<void>(this.baseURL + url, {headers, body, params});
   }
 
-  public httpPatchRequest(url: any, body: any): Observable<any> {
+  public httpPatchRequest<ResponseType>(url: any, body: any): Observable<ResponseType> {
     const headers = this.getHttpHeaders();
 
-    return this.http.patch<any>(this.baseURL + url, body, {headers});
+    return this.http.patch<ResponseType>(this.baseURL + url, body, {headers});
   }
 
   protected getHttpHeaders(): any {
