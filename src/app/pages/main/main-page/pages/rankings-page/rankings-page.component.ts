@@ -57,5 +57,4 @@ export class RankingsPageComponent implements OnInit {
     return this.rankingOption === this.rankingOptions.VISITS ? 'Visits count' : 'Achievements count'
   }
 
-
 }

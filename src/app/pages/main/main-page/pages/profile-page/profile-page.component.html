@@ -1,29 +1,79 @@
 <div class="profile-page">
   <section class="profile-details">
-    <h1 class="heading-1">User Profile</h1>
-    <p class="medium"><strong>Role:</strong> {{ user.role }}</p>
-    <p class="medium"><strong>Email:</strong> {{ user.email }}</p>
-    <p class="medium"><strong>Username:</strong> {{ user.username }}</p>
+    <div>
+      <h1 class="heading-1">User Profile</h1>
+      <p class="medium"><strong>Role:</strong> {{ (userInfo$ | async).role }}</p>
+      <p class="medium"><strong>Email:</strong> {{ (userInfo$ | async).email }}</p>
+      <p class="medium"><strong>Username:</strong> {{ (userInfo$ | async).username }}</p>
+    </div>
+
+    <div class="profile-details__buttons">
+      <div class="logout">
+        <app-sb-button
+          [buttonText]="'Log out'"
+          (buttonClicked)="logOut()"
+        ></app-sb-button>
+      </div>
+
+      <div class="create" *ngIf="(userInfo$ | async).role === userRoles.ADMIN">
+        <app-sb-button
+          [buttonText]="'Create Building'"
+          (buttonClicked)="createBuilding.emit()"
+        ></app-sb-button>
+      </div>
+    </div>
   </section>
 
   <section class="user-lists">
-    <div class="list-section">
+
+    <div class="list-section" *ngIf="(userInfo$ | async).role === userRoles.USER">
       <h2 class="heading-2">Visits</h2>
-      <ul class="horizontal-list">
-        <li *ngFor="let visit of visits" class="medium">{{ visit }}</li>
+      <ul class="vertical-list">
+        <li *ngFor="let visit of visits" class="medium">
+          <p>Building name: {{ visit.building.name }}</p>
+          <p>Visit date: {{ visit.visit_date | date }}</p>
+
+        </li>
       </ul>
     </div>
-    <div class="list-section">
+
+    <div class="list-section" *ngIf="(userInfo$ | async).role === userRoles.USER">
       <h2 class="heading-2">Achievements</h2>
-      <ul class="horizontal-list">
-        <li *ngFor="let achievement of achievements" class="medium">{{ achievement }}</li>
+      <ul class="vertical-list">
+        <li *ngFor="let achievement of achievements" class="medium">
+          <p>Achievement title: {{ achievement.title }}</p>
+          <p>Achievement description: {{ achievement.description }}</p>
+          <p>Obtained: {{ achievement.obtained_date | date }}</p>
+
+        </li>
       </ul>
     </div>
-    <div class="list-section">
+
+    <div class="list-section" *ngIf="(userInfo$ | async).role === userRoles.ADMIN">
       <h2 class="heading-2">Created Buildings</h2>
-      <ul class="horizontal-list">
-        <li *ngFor="let building of createdBuildings" class="medium">{{ building }}</li>
-      </ul>
+      <div class="horizontal-list">
+        <div class="building-item" *ngFor="let building of createdBuildings">
+          <h2 class="heading-2">
+            {{ building?.name }}
+            <span class="medium" *ngIf="building?.visited">visited</span>
+          </h2>
+          <p class="medium"><strong>Location:</strong> <br>
+            Latitude: {{ building?.location.latitude }} <br>
+            Longitude: {{ building?.location.longitude }}
+          </p>
+          <p class="medium"><strong>Description:</strong> {{ building?.description }}</p>
+          <p class="medium"><strong>Owner:</strong> {{ building?.created_by.username }}</p>
+
+          <div>
+            <app-sb-button
+              [buttonText]="'Delete Building'"
+              (buttonClicked)="deleteBuilding(building)"
+            ></app-sb-button>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </section>
 </div>

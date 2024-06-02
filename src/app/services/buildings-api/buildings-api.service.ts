@@ -27,11 +27,15 @@ export class BuildingsApiService extends AbstractHttpComponent {
     return this.httpGetRequest<IBuilding>(`/buildings/${id}`)
   }
 
+  public getUserBuildings(): Observable<IBuilding[]> {
+    return this.httpGetRequest<IBuilding[]>('/buildings/created')
+  }
+
   public editBuilding(id: number, building: any): Observable<IBuilding> {
     return this.httpPatchRequest(`/buildings/${id}`, building)
   }
 
   public deleteBuilding(id: number): Observable<void> {
-    return this.httpDeleteRequest('/buildings/')
+    return this.httpDeleteRequest(`/buildings/${id}`)
   }
 }

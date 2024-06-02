@@ -12,6 +12,10 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 
     .heading-1 {
       margin-bottom: 20px;
@@ -19,6 +23,12 @@
 
     .medium {
       margin-bottom: 10px;
+    }
+
+    &__buttons {
+      .logout {
+        margin-bottom: 16px;
+      }
     }
   }
 
@@ -39,10 +49,11 @@
         margin-bottom: 20px;
       }
 
-      .horizontal-list {
+      .vertical-list {
         gap: 10px;
         padding: 0;
-        overflow-x: auto;
+        max-height: 300px;
+        overflow-y: auto;
 
         li {
           margin-bottom: 10px;
@@ -52,6 +63,57 @@
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
       }
+
+      .horizontal-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 16px;
+      }
+    }
+  }
+}
+
+.building-item {
+  background-color: $white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  * {
+    cursor: default;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+
+}
+
+.building-item.visited {
+  background-color: lighten($accent-primary-default, 40%);
+  color: darken($text-main, 20%);
+  border: 2px solid $accent-primary-default;
+
+  .visit-button {
+    background-color: $accent-primary-default;
+
+    &:hover {
+      background-color: $accent-secondary-light;
+    }
+
+    &:active {
+      background-color: $accent-secondary-light;
     }
   }
 }
