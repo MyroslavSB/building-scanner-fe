@@ -14,17 +14,29 @@
     </p>
     <p class="medium"><strong>Description:</strong> {{ building?.description }}</p>
     <p class="medium"><strong>Owner:</strong> {{ building?.created_by.username }}</p>
+
+    <div class="building-item__button" *ngIf="!building?.visited">
+      <app-sb-button
+        [buttonText]="'Visit building'"
+        (buttonClicked)="visitBuilding()"
+      ></app-sb-button>
+    </div>
   </div>
 
 
   <div class="chat-section">
     <h2 class="heading-2">Chat about this building</h2>
     <div class="chat-container">
-      <div class="message medium" *ngFor="let message of messages">
-        <strong>{{ message.user }}:</strong> {{ message.text }}
+      <div class="message medium"
+           *ngFor="let message of messages"
+           [class.user-message]="(userInfo$ | async).id === message.user.id"
+      >
+        <strong>{{ message.user.username }}</strong> {{ message.created_at | date: 'hh:mm' }} <br>
+        {{message.text}}
       </div>
     </div>
-    <div class="chat-input">
+
+    <div class="chat-input" *ngIf="building?.visited">
       <div class="chat-input__input">
         <app-sb-input
           [control]="newMessage"
@@ -34,6 +46,7 @@
 
       <div class="chat-input__button">
         <app-sb-button
+
           [buttonText]="'Send message'"
           (buttonClicked)="sendMessage()"
         ></app-sb-button>

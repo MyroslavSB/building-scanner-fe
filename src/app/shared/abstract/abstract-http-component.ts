@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Params} from "@angular/router";
-import {LocalStorageService} from "../../services/local-storage/local-storage.service";
 import {ELocalStorageItems} from "../../services/local-storage/utils/e-local-storage-items";
 
 export class AbstractHttpComponent {

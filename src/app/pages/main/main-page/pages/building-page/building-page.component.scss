@@ -40,6 +40,10 @@
 
       .message {
         margin-bottom: 10px;
+
+        &.user-message {
+          text-align: end;
+        }
       }
     }
 

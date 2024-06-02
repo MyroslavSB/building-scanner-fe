@@ -10,7 +10,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('here')
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse && err.status === 401 && !err.url.includes('/auth')) {
