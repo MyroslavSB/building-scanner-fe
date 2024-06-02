@@ -5,7 +5,7 @@ import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-b
 import {SbInputComponent} from "../../../../../shared/components/sb-input/sb-input.component";
 import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {BuildingsApiService} from "../../../../../services/buildings-api/buildings-api.service";
-import {EMPTY, filter, Observable, switchMap, takeUntil} from "rxjs";
+import {EMPTY, filter, Observable, switchMap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessagesApiService} from "../../../../../services/messages-api/messages-api.service";
 import {IMessage} from "../../../../../shared/interfaces/core-models/i-message";

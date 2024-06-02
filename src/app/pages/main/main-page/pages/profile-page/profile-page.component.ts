@@ -23,6 +23,8 @@ import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-b
 import {Router} from "@angular/router";
 import {AppRoutes} from "../../../../../shared/const/routes";
 import {AuthApiService} from "../../../../../services/auth-api-service/auth-api.service";
+import {SbInputComponent} from "../../../../../shared/components/sb-input/sb-input.component";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-profile-page',
@@ -32,7 +34,8 @@ import {AuthApiService} from "../../../../../services/auth-api-service/auth-api.
     AsyncPipe,
     DatePipe,
     NgIf,
-    SbButtonComponent
+    SbButtonComponent,
+    SbInputComponent
   ],
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss', '../buildings-page/buildings-page.component.scss'],
@@ -49,8 +52,7 @@ export class ProfilePageComponent implements OnInit {
   public achievements: IAchievement[] = []
   public createdBuildings: IBuilding[] = []
 
-
-  public createBuilding: EventEmitter<void> = new EventEmitter<void>()
+  public createBuildingForm: FormGroup
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -59,11 +61,18 @@ export class ProfilePageComponent implements OnInit {
     private buildingsAPI: BuildingsApiService,
     private achievementsAPI: AchievementsApiService,
     private authAPI: AuthApiService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {
   }
 
   ngOnInit() {
+    this.getLists()
+
+    this.initForm()
+  }
+
+  private getLists(): void {
     this.getUserInfo()
       .pipe(
         switchMap(user => {
@@ -92,6 +101,17 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
+  private initForm(): void {
+    this.createBuildingForm = this.fb.group({
+      name: ['Some Name'],
+      description: ['Some Description'],
+      latitude: [55],
+      longitude: [55]
+
+    })
+  }
+
+
   private getUserInfo(): Observable<IUser> {
     return this.authAPI.getUserInfo()
       .pipe(takeUntilDestroyed(this.destroyRef$))
@@ -108,6 +128,27 @@ export class ProfilePageComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef$))
       .subscribe(deleted => {
         this.createdBuildings = this.createdBuildings.filter(build => build.id !== building.id)
+        this.cdRef.detectChanges()
+      })
+  }
+
+  public getControl(form: FormGroup, controlName: string): FormControl {
+    return form?.get(controlName) as FormControl;
+  }
+
+  public createBuilding(): void {
+    const {latitude, longitude, name, description} = this.createBuildingForm.getRawValue()
+    this.buildingsAPI.createBuilding({
+      name,
+      description,
+      location: {
+        latitude: Number(latitude),
+        longitude: Number(longitude)
+      }
+    }).pipe(takeUntilDestroyed(this.destroyRef$))
+      .subscribe(building => {
+        this.createBuildingForm.reset({}, {onlySelf: true})
+        this.createdBuildings.push(building)
         this.cdRef.detectChanges()
       })
   }

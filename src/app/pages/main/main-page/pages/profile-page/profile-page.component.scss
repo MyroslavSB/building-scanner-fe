@@ -65,10 +65,19 @@
       }
 
       .horizontal-list {
+        max-height: 450px;
+        overflow-y: auto;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-gap: 16px;
       }
+    }
+
+    &__double {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-column-gap: 16px;
     }
   }
 }
@@ -116,4 +125,8 @@
       background-color: $accent-secondary-light;
     }
   }
+}
+
+.login__main-form-control {
+  margin-bottom: 16px;
 }

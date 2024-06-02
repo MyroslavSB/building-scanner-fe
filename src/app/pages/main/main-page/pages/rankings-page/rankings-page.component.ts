@@ -21,8 +21,6 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 export class RankingsPageComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef)
-  private userRoles = EUserRoles
-
   public rankingOptions = ERankingOptions
   public rankingOption: ERankingOptions = ERankingOptions.VISITS
 
