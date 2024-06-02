@@ -5,14 +5,16 @@ import {SbButtonComponent} from "../../../../../shared/components/sb-button/sb-b
 import {SbInputComponent} from "../../../../../shared/components/sb-input/sb-input.component";
 import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {BuildingsApiService} from "../../../../../services/buildings-api/buildings-api.service";
-import {filter, Observable, switchMap, takeUntil} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {EMPTY, filter, Observable, switchMap, takeUntil} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MessagesApiService} from "../../../../../services/messages-api/messages-api.service";
 import {IMessage} from "../../../../../shared/interfaces/core-models/i-message";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {VisitsApiService} from "../../../../../services/visits-api/visits-api.service";
 import {UserInfoService} from "../../../../../services/user-info/user-info.service";
 import {IUser} from "../../../../../shared/interfaces/core-models/i-user";
+import {catchError} from "rxjs/operators";
+import {AppRoutes} from "../../../../../shared/const/routes";
 
 @Component({
   selector: 'app-building-page',
@@ -49,6 +51,7 @@ export class BuildingPageComponent implements OnInit {
     private visitsAPI: VisitsApiService,
     private userInfoService: UserInfoService,
     private route: ActivatedRoute,
+    private router: Router,
     private cdRef: ChangeDetectorRef
   ) {
 
@@ -66,6 +69,12 @@ export class BuildingPageComponent implements OnInit {
 
           return this.getBuildingInfo(this.buildingId)
             .pipe(
+              catchError(err => {
+                if(err.error.statusCode === 404) {
+                  this.router.navigate([AppRoutes.buildings_page.routerPath])
+                }
+                return EMPTY
+              }),
               switchMap(building => {
                 this.building = building
                 return this.getBuildingMessages()
@@ -87,6 +96,7 @@ export class BuildingPageComponent implements OnInit {
       this.messagesAPI.sendMessage(this.buildingId, this.newMessage.value)
         .pipe(takeUntilDestroyed(this.destroyRef$))
         .subscribe(message => {
+          this.newMessage.setValue('')
           this.messages.push(message)
           this.cdRef.detectChanges()
         })
