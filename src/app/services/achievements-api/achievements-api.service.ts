@@ -16,7 +16,7 @@ export class AchievementsApiService extends AbstractHttpComponent {
   }
 
   public getAchievements(): Observable<IAchievement[]> {
-    return this.httpGetRequest('/achievements/')
+    return this.httpGetRequest('/achievements')
   }
 
 }
