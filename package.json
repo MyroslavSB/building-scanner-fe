@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:heroku": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate-icons": "svg-to-ts-constants --config .svg-to-ts.json"

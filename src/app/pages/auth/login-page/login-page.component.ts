@@ -6,7 +6,7 @@ import {AuthApiService} from "../../../services/auth-api-service/auth-api.servic
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
 import {ELocalStorageItems} from "../../../services/local-storage/utils/e-local-storage-items";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AppRoutes} from "../../../shared/const/routes";
 
 @Component({
@@ -14,7 +14,8 @@ import {AppRoutes} from "../../../shared/const/routes";
   standalone: true,
   imports: [
     SbInputComponent,
-    SbButtonComponent
+    SbButtonComponent,
+    RouterLink
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
@@ -26,7 +27,7 @@ export class LoginPageComponent implements OnInit {
   public loginForm: FormGroup
 
   private localStorageKeys = ELocalStorageItems
-  private appRoutes = AppRoutes
+  public appRoutes = AppRoutes
 
   constructor(
     private fb: FormBuilder,

@@ -19,7 +19,7 @@ import {AuthApiService} from "../../../services/auth-api-service/auth-api.servic
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {LocalStorageService} from "../../../services/local-storage/local-storage.service";
 import {ELocalStorageItems} from "../../../services/local-storage/utils/e-local-storage-items";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AppRoutes} from "../../../shared/const/routes";
 
 @Component({
@@ -32,7 +32,8 @@ import {AppRoutes} from "../../../shared/const/routes";
     SbInputComponent,
     BaseIconComponent,
     NgIf,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    RouterLink
   ],
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.scss',
@@ -49,7 +50,7 @@ export class RegistrationPageComponent implements OnInit {
   public passwordForm: FormGroup
 
   private storageItems = ELocalStorageItems
-  private appRoutes = AppRoutes
+  public appRoutes = AppRoutes
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -96,16 +97,16 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   public registerUser(): void {
+    const {email, username} = this.infoForm.getRawValue()
+    const {password_1} = this.passwordForm.getRawValue()
     const body = {
-      "email": "testuser@gmail.com",
-      "password": "Student2008&",
-      "username": "TestUsername"
+      email, username, password: password_1
     }
     this.authAPI.register(body)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(token => {
         this.localStorage.setItem(this.storageItems.ACCESS_TOKEN, token.access_token)
-        this.router.navigate([this.appRoutes.home_page])
+        this.router.navigate([this.appRoutes.home_page.routerPath])
       })
   }
 
@@ -122,5 +123,6 @@ export class RegistrationPageComponent implements OnInit {
 
     return null;
   }
+    protected readonly ERegSteps = ERegSteps;
 }
 

@@ -65,6 +65,13 @@
 
           <div class="reg-page__main-form-submit">
             <app-sb-button
+              [buttonText]="'Back'"
+              (buttonClicked)="regStep = regSteps.ENTER_INFO"
+            ></app-sb-button>
+          </div>
+
+          <div class="reg-page__main-form-submit">
+            <app-sb-button
               [buttonText]="'Setup password'"
               (buttonClicked)="registerUser()"
             ></app-sb-button>
@@ -73,6 +80,11 @@
       </ng-container>
 
     </ng-container>
+
+    <a class="medium-small" style="margin-top: 16px;cursor: pointer"
+       [routerLink]="appRoutes.login.fullPath">
+      Login to account
+    </a>
   </div>
 </div>
 

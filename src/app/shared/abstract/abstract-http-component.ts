@@ -2,6 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Params} from "@angular/router";
 import {ELocalStorageItems} from "../../services/local-storage/utils/e-local-storage-items";
+import {environment} from "../../../environments/environment";
 
 export class AbstractHttpComponent {
   constructor(
@@ -9,7 +10,7 @@ export class AbstractHttpComponent {
   ) {
   }
 
-  protected baseURL = 'http://localhost:3000/api';
+ protected baseURL: string = environment.baseUrl;
 
   public httpPostRequest<ResponseType>(
     url: any,
