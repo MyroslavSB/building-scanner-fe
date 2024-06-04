@@ -35,7 +35,7 @@
             {{
               (userInfo$ | async).id === message.user.id ? 'You' : message.user.username
             }}
-          </strong> {{ message.created_at | date: 'hh:mm' }} <br>
+          </strong> {{ message.created_at | date: 'shortTime' }} <br>
           {{ message.text }}
         </div>
       </div>
