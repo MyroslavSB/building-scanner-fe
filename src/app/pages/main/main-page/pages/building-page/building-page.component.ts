@@ -119,4 +119,12 @@ export class BuildingPageComponent implements OnInit {
       this.cdRef.detectChanges()
     })
   }
+
+  public  deleteBuilding(): void {
+    this.buildingsAPI.deleteBuilding(this.buildingId)
+      .pipe(takeUntilDestroyed(this.destroyRef$))
+      .subscribe(deleted => {
+        this.router.navigate([AppRoutes.buildings_page])
+      })
+  }
 }

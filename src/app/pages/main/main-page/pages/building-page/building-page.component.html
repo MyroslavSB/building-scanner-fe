@@ -21,6 +21,15 @@
           (buttonClicked)="visitBuilding()"
         ></app-sb-button>
       </div>
+
+      <div class="building-item__button"
+           *ngIf="(userInfo$ | async).role===userRoles.ADMIN &&
+            building.created_by.id === (userInfo$ | async).id">
+        <app-sb-button
+          [buttonText]="'Delete building'"
+          (buttonClicked)="deleteBuilding()"
+        ></app-sb-button>
+      </div>
     </div>
 
 
