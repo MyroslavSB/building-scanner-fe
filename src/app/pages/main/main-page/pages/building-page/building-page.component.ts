@@ -15,6 +15,7 @@ import {UserInfoService} from "../../../../../services/user-info/user-info.servi
 import {IUser} from "../../../../../shared/interfaces/core-models/i-user";
 import {catchError} from "rxjs/operators";
 import {AppRoutes} from "../../../../../shared/const/routes";
+import {EUserRoles} from "../../../../../services/user-info/utils/e-user-roles";
 
 @Component({
   selector: 'app-building-page',
@@ -45,6 +46,7 @@ export class BuildingPageComponent implements OnInit {
 
   public userInfo$: Observable<IUser> = this.userInfoService.userInfo.asObservable()
 
+  public userRoles = EUserRoles
   constructor(
     private buildingsAPI: BuildingsApiService,
     private messagesAPI: MessagesApiService,

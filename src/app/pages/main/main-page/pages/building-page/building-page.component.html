@@ -15,7 +15,7 @@
       <p class="medium"><strong>Description:</strong> {{ building?.description }}</p>
       <p class="medium"><strong>Owner:</strong> {{ building?.created_by.username }}</p>
 
-      <div class="building-item__button" *ngIf="!building?.visited">
+      <div class="building-item__button" *ngIf="!building?.visited && (userInfo$ | async).role!==userRoles.ADMIN">
         <app-sb-button
           [buttonText]="'Visit building'"
           (buttonClicked)="visitBuilding()"
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="chat-input" *ngIf="building?.visited">
+      <div class="chat-input" *ngIf="building?.visited || (userInfo$ | async).role===userRoles.ADMIN">
         <div class="chat-input__input">
           <app-sb-input
             [control]="newMessage"
